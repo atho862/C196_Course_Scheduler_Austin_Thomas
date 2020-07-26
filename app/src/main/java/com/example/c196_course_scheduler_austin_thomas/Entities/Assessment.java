@@ -3,7 +3,6 @@ package com.example.c196_course_scheduler_austin_thomas.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity(tableName = "assessment_table")
