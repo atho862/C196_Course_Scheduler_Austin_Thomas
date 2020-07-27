@@ -25,6 +25,6 @@ public interface TermDao {
     @Query("DELETE FROM term_table")
     void deleteAllTerms();
 
-    @Query("SELECT * FROM term_table ORDER BY termStartDate DESC")
+    @Query("SELECT * FROM term_table ORDER BY termStartDate ASC")
     LiveData<List<Term>> getAllTerms();
 }
