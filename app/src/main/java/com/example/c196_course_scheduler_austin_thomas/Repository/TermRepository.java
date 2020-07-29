@@ -26,7 +26,7 @@ public class TermRepository {
     }
 
     public void update(Term term){
-
+        new UpdateTermAsyncTask(termDao).execute(term);
     }
 
     public void delete(Term term){
@@ -51,6 +51,20 @@ public class TermRepository {
         @Override
         protected Void doInBackground(Term... terms) {
             termDao.insert(terms[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateTermAsyncTask extends AsyncTask<Term, Void, Void>{
+        private TermDao termDao;
+
+        private UpdateTermAsyncTask(TermDao termDao) {
+            this.termDao = termDao;
+        }
+
+        @Override
+        protected Void doInBackground(Term... terms) {
+            termDao.update(terms[0]);
             return null;
         }
     }

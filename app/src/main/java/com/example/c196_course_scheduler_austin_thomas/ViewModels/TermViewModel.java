@@ -25,4 +25,12 @@ public class TermViewModel extends AndroidViewModel {
     public LiveData<List<Term>> getAllTerms() {
         return allTerms;
     }
+
+    public void insertTerm(Term term){
+        repository.insert(term);
+    }
+
+    public void updateTerm(Term term){
+        repository.update(term);
+    }
 }

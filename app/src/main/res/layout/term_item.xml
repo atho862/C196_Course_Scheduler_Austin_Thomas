@@ -10,13 +10,15 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/colorPrimaryDark">
 
         <TextView
             android:id="@+id/text_term_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="StartDate-EndDate"
+            android:textColor="@color/colorLight"
             android:maxLines="1"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -26,6 +28,7 @@
             android:id="@+id/text_term_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorLight"
             android:text="Title"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

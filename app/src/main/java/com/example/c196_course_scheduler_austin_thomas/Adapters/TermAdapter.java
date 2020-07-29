@@ -20,6 +20,7 @@ import java.util.List;
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermHolder> {
     private List<Term> terms = new ArrayList<>();
     private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -42,12 +43,12 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermHolder> {
         return terms.size();
     }
 
-    public void setTerms(List<Term> terms){
+    public void setTerms(List<Term> terms) {
         this.terms = terms;
         notifyDataSetChanged();
     }
 
-    class TermHolder extends RecyclerView.ViewHolder{
+    class TermHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDate;
 
@@ -55,6 +56,26 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermHolder> {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_term_title);
             textViewDate = itemView.findViewById(R.id.text_term_date);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(terms.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Term term);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+
     }
 }

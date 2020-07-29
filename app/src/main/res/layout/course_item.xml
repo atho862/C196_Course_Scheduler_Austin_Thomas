@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/text_course_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="1dp"
+            android:layout_marginRight="1dp"
+            android:text="00/00/000-00/00/0000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorLight" />
+
+        <TextView
+            android:id="@+id/text_course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/text_course_date"
+            android:layout_toLeftOf="@id/text_course_date"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="C100: Course Title"
+            android:textColor="@color/colorLight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <TextView
+            android:id="@+id/text_course_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_course_title"
+            android:textColor="@color/colorLight"
+            android:text="In Progress"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
