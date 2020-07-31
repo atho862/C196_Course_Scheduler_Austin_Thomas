@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorLight"
+    android:background="@color/colorPrimary"
     tools:context=".Activities.AddEditTermActivity">
 
     <EditText
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:hint="Term Title"
         android:inputType="text"
-        android:background="@color/colorLight"/>
+        android:background="@color/colorLight" />
 
     <TextView
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
         android:layout_marginTop="24dp"
         android:text="Term Start Date"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:background="@color/colorLight"/>
+        android:background="@color/colorLight"
+        android:layout_marginBottom="3dp"/>
 
     <DatePicker
         android:id="@+id/start_date_picker"
@@ -33,7 +34,7 @@
         android:calendarViewShown="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorLight"/>
+        android:background="@color/colorLight" />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +43,8 @@
         android:text="Term End Date"
         android:layout_marginTop="24dp"
         android:background="@color/colorLight"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:layout_marginBottom="3dp"/>
 
     <DatePicker
         android:id="@+id/end_date_picker"

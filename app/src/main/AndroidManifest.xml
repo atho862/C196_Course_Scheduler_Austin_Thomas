@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CourseListActivity"
-            android:parentActivityName=".Activities.HomeActivity"/>
+        <activity android:name=".Activities.NotificationSettingsActivity"></activity>
+        <activity android:name=".Activities.AddEditAssessmentActivity" />
+        <activity android:name=".Activities.AssessmentListActivity" />
+        <activity android:name=".Activities.AddEditCourseMentorActivity" />
+        <activity android:name=".Activities.CourseMentorListActivity" />
+        <activity android:name=".Activities.AddEditCourseActivity" />
+        <activity
+            android:name=".Activities.CourseListActivity"
+            android:parentActivityName=".Activities.HomeActivity" />
         <activity
             android:name=".Activities.HomeActivity"
             android:launchMode="singleTop">

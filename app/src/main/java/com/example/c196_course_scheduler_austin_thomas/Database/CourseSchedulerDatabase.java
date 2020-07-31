@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.c196_course_scheduler_austin_thomas.Daos.CourseDao;
 import com.example.c196_course_scheduler_austin_thomas.Daos.TermDao;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Assessment;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Course;
@@ -25,25 +26,25 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-@Database(entities = {Term.class, Course.class, Assessment.class, CourseMentor.class}, version = 1)
+@Database(entities = {Term.class, Course.class, Assessment.class, CourseMentor.class}, version = 2)
 @TypeConverters({Converters.class})
 public abstract class CourseSchedulerDatabase extends RoomDatabase {
     private static CourseSchedulerDatabase instance;
 
     public abstract TermDao termDao();
+    public abstract CourseDao courseDao();
 
     public static synchronized CourseSchedulerDatabase getInstance(Context context){
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     CourseSchedulerDatabase.class, "coursescheduler_database")
-                    .fallbackToDestructiveMigration()
-                    .addCallback(roomCallbakc)
+                    .addCallback(roomCallback)
                     .build();
         }
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallbakc = new RoomDatabase.Callback(){
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);

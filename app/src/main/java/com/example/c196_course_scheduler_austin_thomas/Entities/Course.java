@@ -14,15 +14,13 @@ public class Course {
     private int termId;
     private String courseTitle;
     private String courseStatus;
-    private String courseNotes;
     private Date courseStartDate;
     private Date anticipatedEndDate;
 
-    public Course(int termId, String courseTitle, String courseStatus, String courseNotes, Date courseStartDate, Date anticipatedEndDate) {
+    public Course(int termId, String courseTitle, String courseStatus, Date courseStartDate, Date anticipatedEndDate) {
         this.termId = termId;
         this.courseTitle = courseTitle;
         this.courseStatus = courseStatus;
-        this.courseNotes = courseNotes;
         this.courseStartDate = courseStartDate;
         this.anticipatedEndDate = anticipatedEndDate;
     }
@@ -45,10 +43,6 @@ public class Course {
 
     public String getCourseStatus() {
         return courseStatus;
-    }
-
-    public String getCourseNotes() {
-        return courseNotes;
     }
 
     public Date getCourseStartDate() {

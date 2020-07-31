@@ -29,6 +29,7 @@ public class AddEditTermActivity extends AppCompatActivity {
             "com.example.c196_course_scheduler_austin_thomas.Activities.EXTRA_END_DATE";
     public static final String EXTRA_ID =
             "com.example.c196_course_scheduler_austin_thomas.Activities.EXTRA_ID";
+
     private EditText editTextTermTitle;
     private DatePicker datePickerTermStartDate;
     private DatePicker datePickerTermEndDate;

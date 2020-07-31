@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.c196_course_scheduler_austin_thomas.Entities.Term;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -27,4 +28,7 @@ public interface TermDao {
 
     @Query("SELECT * FROM term_table ORDER BY termStartDate ASC")
     LiveData<List<Term>> getAllTerms();
+
+    @Query("SELECT termTitle FROM term_table ORDER BY termStartDate ASC")
+    List<String> getAllTermTitles();
 }

@@ -9,7 +9,9 @@ import com.example.c196_course_scheduler_austin_thomas.Daos.TermDao;
 import com.example.c196_course_scheduler_austin_thomas.Database.CourseSchedulerDatabase;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Term;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class TermRepository {
     private TermDao termDao;
@@ -41,6 +43,10 @@ public class TermRepository {
         return allTerms;
     }
 
+    public List<String> getAllTermTitles() throws ExecutionException, InterruptedException {
+        return new GetTermTitlesAsyncTask(termDao).execute().get();
+    }
+
     private static class InsertTermAsyncTask extends AsyncTask<Term, Void, Void> {
         private TermDao termDao;
 
@@ -66,6 +72,20 @@ public class TermRepository {
         protected Void doInBackground(Term... terms) {
             termDao.update(terms[0]);
             return null;
+        }
+    }
+
+    private static class GetTermTitlesAsyncTask extends AsyncTask<Void, Void, List<String>>{
+        private TermDao termDao;
+
+        private GetTermTitlesAsyncTask(TermDao termDao){
+            this.termDao = termDao;
+        }
+
+        @Override
+        protected List<String> doInBackground(Void... voids) {
+            List<String> termTitles = termDao.getAllTermTitles();
+            return termTitles;
         }
     }
 }
