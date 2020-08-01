@@ -31,4 +31,7 @@ public interface TermDao {
 
     @Query("SELECT termTitle FROM term_table ORDER BY termStartDate ASC")
     List<String> getAllTermTitles();
+
+    @Query("SELECT termId FROM term_table WHERE termTitle = :termTitle")
+    int getTermIdByTermTitle(String termTitle);
 }

@@ -35,17 +35,10 @@ public class CourseViewModel extends AndroidViewModel {
         return allCourses;
     }
 
-    public LiveData<List<Course>> getCoursesForTerm(int termId){
-        MutableLiveData<List<Course>> coursesForTerm = new MutableLiveData<>();
-        ArrayList<Course> courses = new ArrayList<>();
+    public List<Course> getCoursesForTerm(int termId){
 
-        for (Course course : allCourses.getValue()
-             ) {
-            if (course.getTermId() == termId){
-                courses.add(course);
-            }
-        }
-        coursesForTerm.setValue(courses);
+        List<Course> coursesForTerm = repository.getCoursesByTermId(termId);
         return coursesForTerm;
     }
+
 }

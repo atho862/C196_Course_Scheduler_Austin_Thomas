@@ -17,7 +17,6 @@ import java.util.concurrent.ExecutionException;
 public class TermViewModel extends AndroidViewModel {
     private TermRepository repository;
     private LiveData<List<Term>> allTerms;
-    private List<String> allTermTitles;
 
     public TermViewModel(@NonNull Application application) {
         super(application);
@@ -43,5 +42,9 @@ public class TermViewModel extends AndroidViewModel {
 
     public List<String> getAllTermTitles() throws ExecutionException, InterruptedException {
         return repository.getAllTermTitles();
+    }
+
+    public int getTermIdBytTermTitle(String termTitle){
+        return repository.getTermIdByTermTitle(termTitle);
     }
 }

@@ -47,6 +47,16 @@ public class TermRepository {
         return new GetTermTitlesAsyncTask(termDao).execute().get();
     }
 
+    public int getTermIdByTermTitle(String termTitle){
+        try {
+            return new GetTermIdByTermTitleAsyncTask(termDao).execute(termTitle).get();
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return 0;
+        }
+    }
+
     private static class InsertTermAsyncTask extends AsyncTask<Term, Void, Void> {
         private TermDao termDao;
 
@@ -86,6 +96,19 @@ public class TermRepository {
         protected List<String> doInBackground(Void... voids) {
             List<String> termTitles = termDao.getAllTermTitles();
             return termTitles;
+        }
+    }
+
+    private static class GetTermIdByTermTitleAsyncTask extends AsyncTask<String, Void, Integer>{
+        private TermDao termDao;
+
+        private GetTermIdByTermTitleAsyncTask(TermDao termDao){
+            this.termDao = termDao;
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            return termDao.getTermIdByTermTitle(strings[0]);
         }
     }
 }
