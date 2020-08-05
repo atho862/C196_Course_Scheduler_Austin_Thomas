@@ -9,16 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.NotificationSettingsActivity"/>
-        <activity android:name=".Activities.AddEditAssessmentActivity"
-            android:parentActivityName=".Activities.AssessmentListActivity"/>
-        <activity android:name=".Activities.AssessmentListActivity" />
-        <activity android:name=".Activities.AddEditCourseMentorActivity"
-            android:parentActivityName=".Activities.CourseMentorListActivity"/>
-        <activity android:name=".Activities.CourseMentorListActivity"
+        <receiver android:name=".Receivers.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name=".Activities.AddEditNoteActivity"
+            android:parentActivityName=".Activities.AddEditCourseActivity" />
+        <activity
+            android:name=".Activities.NotificationSettingsActivity" />
+        <activity
+            android:name=".Activities.AddEditAssessmentActivity"
+            android:parentActivityName=".Activities.AddEditCourseActivity" />
+        <activity
+            android:name=".Activities.AddEditCourseMentorActivity"
+            android:parentActivityName=".Activities.CourseMentorListActivity" />
+        <activity
+            android:name=".Activities.CourseMentorListActivity"
             android:parentActivityName=".Activities.CourseListActivity" />
-        <activity android:name=".Activities.AddEditCourseActivity"
-            android:parentActivityName=".Activities.CourseListActivity"/>
+        <activity
+            android:name=".Activities.AddEditCourseActivity"
+            android:parentActivityName=".Activities.CourseListActivity" />
         <activity
             android:name=".Activities.CourseListActivity"
             android:parentActivityName=".Activities.HomeActivity" />

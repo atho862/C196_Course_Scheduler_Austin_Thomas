@@ -7,8 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.c196_course_scheduler_austin_thomas.Entities.Assessment;
+import com.example.c196_course_scheduler_austin_thomas.Entities.CourseMentor;
 import com.example.c196_course_scheduler_austin_thomas.Repository.AssessmentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssessmentViewModel extends AndroidViewModel {
@@ -34,10 +36,23 @@ public class AssessmentViewModel extends AndroidViewModel {
     }
 
     public List<Assessment> getAssessmentsForCourse(int courseId){
-        return repository.getAssessmentsForCourse(courseId);
+        List<Assessment> assessmentsForCourse = new ArrayList<>();
+
+        for (Assessment assessment : allAssessments.getValue()
+             ) {
+            if (assessment.getCourseId() == courseId){
+                assessmentsForCourse.add(assessment);
+            }
+        }
+
+        return assessmentsForCourse;
     }
 
     public LiveData<List<Assessment>> getAllAssessments(){
         return allAssessments;
+    }
+
+    public int getAssessmentCountsForCourse(int courseId){
+        return repository.getAssessmentCountForCourse(courseId);
     }
 }

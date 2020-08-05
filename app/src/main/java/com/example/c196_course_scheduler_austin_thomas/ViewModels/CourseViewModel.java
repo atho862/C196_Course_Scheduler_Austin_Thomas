@@ -36,9 +36,20 @@ public class CourseViewModel extends AndroidViewModel {
     }
 
     public List<Course> getCoursesForTerm(int termId){
+        List<Course> coursesForTerm = new ArrayList<>();
 
-        List<Course> coursesForTerm = repository.getCoursesByTermId(termId);
+        for (Course course : allCourses.getValue()
+             ) {
+            if (course.getTermId() == termId){
+                coursesForTerm.add(course);
+            }
+        }
+
         return coursesForTerm;
+    }
+
+    public int getCoursesCountByTermId(int termId){
+        return repository.getCourseCountByTermId(termId);
     }
 
 }

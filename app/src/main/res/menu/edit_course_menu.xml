@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Save Course"
+        android:id="@+id/edit_course_save_menu_item"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_save" />
+    <item android:title="Add Assessment"
+        android:id="@+id/edit_course_view_assessment_menu_item" />
+    <item android:title="Add Course Mentor"
+        android:id="@+id/edit_course_add_course_mentor_menu_item" />
+    <item android:title="Add Note"
+        android:id="@+id/add_note_menu_item" />
+    <item android:title="Delete Course"
+        android:id="@+id/edit_course_delete_course_menu_item" />
+    <item android:id="@+id/add_course_start_date_notification"
+        android:title="Add Notification for Course Start" />
+    <item android:id="@+id/add_course_end_date_notification"
+        android:title="Add Notification for Course End" />
+</menu>

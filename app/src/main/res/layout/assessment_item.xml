@@ -24,12 +24,12 @@
             android:textColor="@color/colorLight" />
 
         <TextView
-            android:id="@+id/text_assessment_type"
+            android:id="@+id/text_assessment_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@id/text_assessment_due_date"
             android:layout_toLeftOf="@id/text_assessment_due_date"
-            android:text="Objective Assessment"
+            android:text="Assessment Title"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

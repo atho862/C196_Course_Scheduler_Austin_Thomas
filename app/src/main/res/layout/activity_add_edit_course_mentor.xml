@@ -6,4 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".Activities.AddEditCourseMentorActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_text_course_mentor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="Course Mentor Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@color/colorLight" />
+
+        <EditText
+            android:id="@+id/edit_text_course_mentor_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:background="@color/colorLight"
+            android:hint="Course Mentor Email Address" />
+
+        <EditText
+            android:id="@+id/edit_text_course_mentor_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:hint="Course Mentor Phone Number"
+            android:background="@color/colorLight"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,8 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.loader.content.AsyncTaskLoader;
+import androidx.room.Delete;
 
-import com.example.c196_course_scheduler_austin_thomas.Activities.CourseListActivity;
 import com.example.c196_course_scheduler_austin_thomas.Daos.CourseDao;
 import com.example.c196_course_scheduler_austin_thomas.Database.CourseSchedulerDatabase;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Course;
@@ -31,21 +30,21 @@ public class CourseRepository {
         new UpdateCourseAsyncTask(courseDao).execute(course);
     }
 
-    public void deleteCourse(Course course){
-        courseDao.deleteCourse(course);
+    public void deleteCourse(Course course) {
+        new DeleteCourseAsyncTask(courseDao).execute(course);
     }
 
     public LiveData<List<Course>> getAllCourses(){
         return allCourses;
     }
 
-    public List<Course> getCoursesByTermId(int termId){
+    public int getCourseCountByTermId(int termId){
         try {
-            return new GetCoursesByTermIdAsyncTask(courseDao).execute(termId).get();
+            return new GetCourseCountByTermIdAsyncTask(courseDao).execute(termId).get();
         }
         catch (Exception e){
             System.out.println(e);
-            return null;
+            return 0;
         }
     }
 
@@ -77,16 +76,30 @@ public class CourseRepository {
         }
     }
 
-    private static class GetCoursesByTermIdAsyncTask extends AsyncTask<Integer, Void, List<Course>>{
+    private static class DeleteCourseAsyncTask extends AsyncTask<Course, Void, Void>{
         private CourseDao courseDao;
 
-        private GetCoursesByTermIdAsyncTask(CourseDao courseDao){
+        private DeleteCourseAsyncTask(CourseDao courseDao){
             this.courseDao = courseDao;
         }
 
         @Override
-        protected List<Course> doInBackground(Integer... integers) {
-            return courseDao.getCoursesByTermId(integers[0]);
+        protected Void doInBackground(Course... courses) {
+            courseDao.deleteCourse(courses[0]);
+            return null;
+        }
+    }
+
+    private static class GetCourseCountByTermIdAsyncTask extends AsyncTask<Integer, Void, Integer>{
+        private CourseDao courseDao;
+
+        private GetCourseCountByTermIdAsyncTask(CourseDao courseDao){
+            this.courseDao = courseDao;
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... integers) {
+            return courseDao.getCountOfCoursesByTermId(integers[0]);
         }
     }
 }

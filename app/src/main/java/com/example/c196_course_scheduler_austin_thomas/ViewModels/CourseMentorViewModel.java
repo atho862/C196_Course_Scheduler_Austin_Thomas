@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import com.example.c196_course_scheduler_austin_thomas.Entities.CourseMentor;
 import com.example.c196_course_scheduler_austin_thomas.Repository.CourseMentorRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMentorViewModel extends AndroidViewModel {
@@ -38,6 +39,14 @@ public class CourseMentorViewModel extends AndroidViewModel {
     }
 
     public List<CourseMentor> getCourseMentorsForCourse(int courseId){
-        return repository.getCourseMentorsForCourse(courseId);
+        List<CourseMentor> courseMentors = new ArrayList<>();
+        for (CourseMentor courseMentor : allCourseMentors.getValue()
+             ) {
+            if (courseMentor.getCourseId() == courseId){
+                courseMentors.add(courseMentor);
+            }
+        }
+
+        return courseMentors;
     }
 }

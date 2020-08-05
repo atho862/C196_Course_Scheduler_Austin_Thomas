@@ -40,7 +40,7 @@ public class TermViewModel extends AndroidViewModel {
         repository.delete(term);
     }
 
-    public List<String> getAllTermTitles() throws ExecutionException, InterruptedException {
+    public List<String> getAllTermTitles() {
         return repository.getAllTermTitles();
     }
 

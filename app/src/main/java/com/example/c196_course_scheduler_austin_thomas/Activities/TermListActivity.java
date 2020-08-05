@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.c196_course_scheduler_austin_thomas.Adapters.TermAdapter;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Term;
 import com.example.c196_course_scheduler_austin_thomas.R;
+import com.example.c196_course_scheduler_austin_thomas.ViewModels.CourseViewModel;
 import com.example.c196_course_scheduler_austin_thomas.ViewModels.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,11 +26,13 @@ public class TermListActivity extends AppCompatActivity {
     public static final int ADD_TERM_REQUEST = 1;
     public static final int EDIT_TERM_REQUEST = 2;
     private TermViewModel termViewModel;
+    private CourseViewModel courseViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Terms");
 
         FloatingActionButton buttonAddTerm = findViewById(R.id.button_add_term);
         buttonAddTerm.setOnClickListener(new View.OnClickListener() {
@@ -82,21 +85,40 @@ public class TermListActivity extends AppCompatActivity {
             Toast.makeText(this, String.format("%s term saved successfully!", termTitle), Toast.LENGTH_SHORT).show();
         }
         else if (requestCode == EDIT_TERM_REQUEST && resultCode == RESULT_OK){
-            int id = data.getIntExtra(AddEditTermActivity.EXTRA_ID, -1);
+            if (data.getStringExtra(AddEditTermActivity.EXTRA_TERM_ACTION).equals("EDIT")){
+                int id = data.getIntExtra(AddEditTermActivity.EXTRA_ID, -1);
 
-            if (id == -1){
-                Toast.makeText(this, "Term can't be updated", Toast.LENGTH_SHORT).show();
-                return;
+                if (id == -1){
+                    Toast.makeText(this, "Term can't be updated", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String termTitle = data.getStringExtra(AddEditTermActivity.EXTRA_TITLE);
+                Date termStartDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_START_DATE, 0));
+                Date termEndDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_END_DATE, 0));
+                Term term = new Term(termTitle, termStartDate, termEndDate);
+                term.setTermId(id);
+                termViewModel.updateTerm(term);
+
+                Toast.makeText(this, String.format("%s term successfully updated!", termTitle), Toast.LENGTH_SHORT).show();
             }
+            else {
+                courseViewModel = ViewModelProviders.of(this).get(CourseViewModel.class);
+                int coursesInTerm = courseViewModel.getCoursesCountByTermId(data.getIntExtra(AddEditTermActivity.EXTRA_ID, -1));
+                if (coursesInTerm > 0){
+                    Toast.makeText(this, "You must delete all courses from a term before deleting it", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-            String termTitle = data.getStringExtra(AddEditTermActivity.EXTRA_TITLE);
-            Date termStartDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_START_DATE, 0));
-            Date termEndDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_END_DATE, 0));
-            Term term = new Term(termTitle, termStartDate, termEndDate);
-            term.setTermId(id);
-            termViewModel.updateTerm(term);
+                String termTitle = data.getStringExtra(AddEditTermActivity.EXTRA_TITLE);
+                Date termStartDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_START_DATE, 0));
+                Date termEndDate = new Date(data.getLongExtra(AddEditTermActivity.EXTRA_END_DATE, 0));
+                Term term = new Term(termTitle, termStartDate, termEndDate);
+                term.setTermId(data.getIntExtra(AddEditTermActivity.EXTRA_ID, -1));
+                termViewModel.deleteTerm(term);
 
-            Toast.makeText(this, String.format("%s term successfully updated!", termTitle), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, termTitle + " was successfully deleted", Toast.LENGTH_LONG).show();
+            }
         }
         else {
 

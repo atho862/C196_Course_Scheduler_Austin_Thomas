@@ -4,12 +4,15 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Delete;
 
 import com.example.c196_course_scheduler_austin_thomas.Daos.TermDao;
 import com.example.c196_course_scheduler_austin_thomas.Database.CourseSchedulerDatabase;
+import com.example.c196_course_scheduler_austin_thomas.Entities.Assessment;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Term;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,19 +35,21 @@ public class TermRepository {
     }
 
     public void delete(Term term){
-
-    }
-
-    public void deleteAllNotes(){
-
+        new DeleteTermAsyncTask(termDao).execute(term);
     }
 
     public LiveData<List<Term>> getAllTerms(){
         return allTerms;
     }
 
-    public List<String> getAllTermTitles() throws ExecutionException, InterruptedException {
-        return new GetTermTitlesAsyncTask(termDao).execute().get();
+    public List<String> getAllTermTitles() {
+        try {
+            return new GetTermTitlesAsyncTask(termDao).execute().get();
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     public int getTermIdByTermTitle(String termTitle){
@@ -81,6 +86,20 @@ public class TermRepository {
         @Override
         protected Void doInBackground(Term... terms) {
             termDao.update(terms[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteTermAsyncTask extends AsyncTask<Term, Void, Void>{
+        private TermDao termDao;
+
+        private DeleteTermAsyncTask(TermDao termDao){
+            this.termDao = termDao;
+        }
+
+        @Override
+        protected Void doInBackground(Term... terms) {
+            termDao.delete(terms[0]);
             return null;
         }
     }

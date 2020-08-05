@@ -47,6 +47,17 @@ public class AssessmentRepository {
         }
     }
 
+    public int getAssessmentCountForCourse(int courseId){
+        try {
+            return new GetAssessmentCountForCourseAsyncTask(assessmentDao).execute(courseId).get();
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
+
+    }
+
     private static class InsertAssessmentAsyncTask extends AsyncTask<Assessment, Void, Void> {
         private AssessmentDao assessmentDao;
 
@@ -101,6 +112,19 @@ public class AssessmentRepository {
         protected List<Assessment> doInBackground(Integer ...integers) {
             List<Assessment> assessmentsForCourse = assessmentDao.getAssessmentsForCourseId(integers[0]);
             return assessmentsForCourse;
+        }
+    }
+
+    private static class GetAssessmentCountForCourseAsyncTask extends AsyncTask<Integer, Void, Integer> {
+        private AssessmentDao assessmentDao;
+
+        private GetAssessmentCountForCourseAsyncTask(AssessmentDao assessmentDao){
+            this.assessmentDao = assessmentDao;
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... integers) {
+            return assessmentDao.getAssessmentCountForCourse(integers[0]);
         }
     }
 

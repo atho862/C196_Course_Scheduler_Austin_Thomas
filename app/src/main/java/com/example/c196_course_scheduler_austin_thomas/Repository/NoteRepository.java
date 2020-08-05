@@ -15,10 +15,12 @@ import java.util.concurrent.ExecutionException;
 
 public class NoteRepository {
     private NoteDao noteDao;
+    private LiveData<List<Note>> allNotes;
 
     public NoteRepository(Application application) {
         CourseSchedulerDatabase database = CourseSchedulerDatabase.getInstance(application);
         noteDao = database.noteDao();
+        allNotes = noteDao.getAllNotes();
     }
 
     public void insertNote(Note note){
@@ -31,6 +33,10 @@ public class NoteRepository {
 
     public void deleteNote(Note note){
         new DeleteNoteAsyncTask(noteDao).execute(note);
+    }
+
+    public LiveData<List<Note>> getAllNotes(){
+        return allNotes;
     }
 
     public LiveData<List<Note>> getNotesForCourse(int courseId) {
@@ -66,7 +72,7 @@ public class NoteRepository {
 
         @Override
         protected Void doInBackground(Note... notes) {
-            noteDao.insertNote(notes[0]);
+            noteDao.updateNote(notes[0]);
             return null;
         }
     }

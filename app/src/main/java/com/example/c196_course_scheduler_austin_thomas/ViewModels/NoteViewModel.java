@@ -9,14 +9,17 @@ import androidx.lifecycle.LiveData;
 import com.example.c196_course_scheduler_austin_thomas.Entities.Note;
 import com.example.c196_course_scheduler_austin_thomas.Repository.NoteRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteViewModel extends AndroidViewModel {
     private NoteRepository repository;
+    private LiveData<List<Note>> allNotes;
 
     public NoteViewModel(@NonNull Application application) {
         super(application);
         repository = new NoteRepository(application);
+        allNotes = repository.getAllNotes();
     }
 
     public void insertNote(Note note){
@@ -31,7 +34,19 @@ public class NoteViewModel extends AndroidViewModel {
         repository.deleteNote(note);
     }
 
-    public LiveData<List<Note>> getNotesForCourse(int courseId){
-        return repository.getNotesForCourse(courseId);
+    public LiveData<List<Note>> getAllNotes(){
+        return allNotes;
+    }
+
+    public List<Note> getNotesForCourse(int courseId){
+        List<Note> notesForCourse = new ArrayList<>();
+        for (Note note : allNotes.getValue()
+             ) {
+            if (note.getCourseId() == courseId){
+                notesForCourse.add(note);
+            }
+        }
+
+        return notesForCourse;
     }
 }
